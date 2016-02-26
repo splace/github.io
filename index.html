@@ -1,0 +1,120 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>File Contents Viewer</title>
+<style  type="text/css">
+th {color:blue;width:5%}
+td {text-align:center}
+table { width:90%;margin-left:5%}
+
+</style>
+</head>
+<body>
+<h1 style="text-align: center">File Contents Viewer</h1>
+<h3 style="color:red;display:inline" id="description">instructions:</h3>
+<h3 style="color:blue" id="filename">[drop file onto grid]</h3>
+    
+<table rules="all" frame="hsides"  ondrop="droppedOntoTable(event);" ondragenter="return false" ondragover="return false"> 
+<thead>
+     <tr><th colspan="2" rowspan="2">Address</th><th colspan="16">x</th></tr>
+     <tr><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th><th>f</th></tr>
+     
+</thead>
+
+<tbody>
+     <tr><th rowspan="16" width="4%" onwheel="this.textContent='0x'+Math.max(0,parseInt(this.textContent,16)+Math.sign(event.deltaY)).toString(16).toUpperCase();start=parseInt(this.textContent,16);fillRows(result,start*256)" onkeydown="this.textContent='0x'+Math.max(0,(parseInt(this.textContent,16)+((event.keyCode==40)?1:0)-((event.keyCode==38)?1:0))).toString(16).toUpperCase();start=parseInt(this.textContent,16);fillRows(result,start*256)" tabindex="0">0x0</th><th width="4%">0x</th><td id="row0"</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>1x</th><td id="row1"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>2x</th><td id="row2"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>3x</th><td id="row3"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>4x</th><td id="row4"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>5x</th><td id="row5"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>6x</th><td id="row6"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>7x</th><td id="row7"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>8x</th><td id="row8"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>9x</th><td id="row9"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>ax</th><td id="rowA"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>bx</th><td id="rowB"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>cx</th><td id="rowC"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>dx</th><td id="rowD"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>ex</th><td id="rowE"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+     <tr><th>fx</th><td id="rowF"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+<p>Open character pop-up:
+    <button border="1" onclick="window.open('data:text/plain;charset=UTF-8,'+result,'UTF-8 window','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');">UTF-8</button>
+     <button border="1" onclick="window.open('data:text/plain;charset=ISO-8859-15,'+result,'ISO-8859-15 window','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');">ISO-8859-15</button>
+   <button border="1" onclick="window.open('data:text/plain;charset=UTF-16,'+result,'UTF-16 window','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');">UTF-16</button>
+    <button border="1" onclick="window.open('data:text/plain;charset=UTF-32,'+result,'UTF-32 window','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');">UTF-32</button>
+    <button border="1" onclick="window.open('data:text/plain;charset=ASCII,'+result,'ASCII window','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');">ASCII</button>
+      <button border="1" onclick="window.open('data:text/plain;charset=ANSI,'+result,'ANSI window','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');">ANSI</button>
+      <button border="1" onclick="window.open('data:text/plain;charset=utf-7,'+result,'UTF-7 window','left=20,top=20,width=500,height=500,toolbar=1,resizable=0');">UTF-7</button>
+    
+    
+</p>
+	<script type="text/javascript">
+
+start = 0
+result = ""
+
+function droppedOntoTable(evt) {
+    evt.stopPropagation();
+    if (file = evt.dataTransfer.files[0]) {
+        evt.preventDefault()
+        document.getElementById("description").innerHTML="Viewing file"
+        document.getElementById("filename").innerHTML=file.name
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            result = e.target.result
+            fillRows(result, start * 256)
+        }
+        reader.readAsBinaryString(file);
+        return
+    }
+
+}
+
+
+function fillRows(contents, index) {
+    fillRow(document.getElementById('row0'), index + 0, contents)
+    fillRow(document.getElementById('row1'), index + 16, contents)
+    fillRow(document.getElementById('row2'), index + 32, contents)
+    fillRow(document.getElementById('row3'), index + 48, contents)
+    fillRow(document.getElementById('row4'), index + 64, contents)
+    fillRow(document.getElementById('row5'), index + 80, contents)
+    fillRow(document.getElementById('row6'), index + 96, contents)
+    fillRow(document.getElementById('row7'), index + 112, contents)
+    fillRow(document.getElementById('row8'), index + 128, contents)
+    fillRow(document.getElementById('row9'), index + 144, contents)
+    fillRow(document.getElementById('rowA'), index + 160, contents)
+    fillRow(document.getElementById('rowB'), index + 176, contents)
+    fillRow(document.getElementById('rowC'), index + 192, contents)
+    fillRow(document.getElementById('rowD'), index + 208, contents)
+    fillRow(document.getElementById('rowE'), index + 224, contents)
+    fillRow(document.getElementById('rowF'), index + 240, contents)
+}
+base = 16
+
+function fillRow(target, index, source) {
+    target.textContent = source.charCodeAt(index + 0).toString(base).toUpperCase()
+    target.nextSibling.textContent = source.charCodeAt(index + 1).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.textContent = source.charCodeAt(index + 2).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 3).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 4).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 5).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 6).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 7).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 8).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 9).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 10).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 11).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 12).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 13).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 14).toString(base).toUpperCase()
+    target.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.textContent = source.charCodeAt(index + 15).toString(base).toUpperCase()
+
+
+
+}
+	</script>
+	
+</body>
+</html>
